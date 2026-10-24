@@ -40,3 +40,42 @@ body{font-family:'VT323',monospace;font-size:19px;letter-spacing:.3px;background
 .privacy-note,.tiny-note{font-family:'VT323',monospace;font-size:15px}
 *{scrollbar-color:#6653a1 #101329}
 @media(max-width:650px){.topbar h1{font-size:16px}.chat-heading h2{font-size:10px}.eyebrow{font-size:8px}.brand strong{font-size:10px}}
+
+/* Combined visual upgrade: 8-bit + cyberpunk + pixel-anime + full retro-game HUD */
+body{background-image:linear-gradient(#9c76ff12 1px,transparent 1px),linear-gradient(90deg,#9c76ff12 1px,transparent 1px),radial-gradient(ellipse at 15% 15%,#ff3ea61a,transparent 30%),radial-gradient(ellipse at 85% 10%,#00eaff20,transparent 34%),linear-gradient(180deg,#090b1a,#12102b 60%,#080b18);background-size:8px 8px,8px 8px,auto,auto,auto}
+.topbar{position:relative}
+.topbar:after{content:'AURA.exe  //  PIXEL COMPANION';font-family:'VT323',monospace;font-size:16px;letter-spacing:1px;color:#71f9ff;border:1px solid #3b6c8c;padding:5px 9px;margin-left:auto}
+.profile-chip{color:#7dffb3;border-color:#356e6c;background:#0b2028}
+.companion-panel,.chat-panel{position:relative;box-shadow:5px 5px 0 #03040b,0 0 18px #9b69ff18}
+.companion-panel:before,.chat-panel:before{content:'◆';position:absolute;right:10px;top:7px;color:#ff78c8;font-size:12px;z-index:5;pointer-events:none}
+.avatar-stage{isolation:isolate}
+.avatar-stage:before{content:'✦  PIXEL WORLD  ✦';position:absolute;top:12px;left:12px;font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:0;color:#7df8ff;text-shadow:2px 2px #692b8c}
+.avatar-stage:after{content:'HP  ♥ ♥ ♥   ◆ LVL 01';position:absolute;left:12px;bottom:12px;font-family:'Press Start 2P',monospace;font-size:7px;color:#ff9bdd;text-shadow:1px 1px #351449}
+.avatar{filter:contrast(1.12) saturate(1.25) drop-shadow(4px 4px 0 #18102d);image-rendering:pixelated}
+.face{background-color:#f2c4ac;box-shadow:inset -5px -5px 0 #bd847e,inset 4px 3px 0 #ffe0cb}
+.hair{box-shadow:inset -7px 0 #0b1022}
+.eyes i{background:#211a3b;box-shadow:2px 1px 0 #fff2d8}
+.body{background:linear-gradient(90deg,#ff78c8 0 20%,#a85bdb 20% 80%,#6f66ef 80%);border:2px solid #e9b7ff}
+.avatar.cool .body{background:linear-gradient(90deg,#59f2ff 0 20%,#427cd2 20% 80%,#a18bff 80%);border-color:#9bffff}
+.avatar.anime .body{background:linear-gradient(90deg,#ff7bbd 0 20%,#8b54e8 20% 80%,#5a4eff 80%);border-color:#ffd1f1}
+.avatar.anime .hair{background:linear-gradient(90deg,#6c42ce 0 25%,#29204d 25% 75%,#ff78c8 75%);box-shadow:4px 0 0 #332063}
+.avatar.anime .eyes i{height:9px;width:10px;background:#111a43;box-shadow:0 0 0 2px #78faff}
+.avatar-caption{background:#0a1024dd;border:1px solid #ff78c8;padding:7px 10px;box-shadow:3px 3px 0 #03040b}
+.avatar-caption span{font-size:16px;color:#7df8ff}
+.live-pill{background:#102d35;color:#7dffb3;border:1px solid #3a8585}
+.chat-heading{background:linear-gradient(90deg,#17142f,#10172b);border-bottom:2px solid #514b83}
+.chat-heading h2{color:#ffe4fa;text-shadow:2px 2px #522f81}
+.messages{background-image:linear-gradient(#8b72e90a 1px,transparent 1px);background-size:100% 8px}
+.message p{background:#151b36;border-left:3px solid #9b80ff;padding:9px 11px;display:inline-block;max-width:100%}
+.user-message p{border-left-color:#71f9ff;background:#102532}
+.message-label{color:#ff9bdd}
+.suggestions button{border-color:#45647c;color:#a8f9ff}
+.suggestions button:hover{color:#fff;box-shadow:0 0 10px #ff78c866}
+.composer{box-shadow:inset 0 0 12px #24153e,4px 4px 0 #03040b}
+.composer textarea::placeholder{color:#8276b0}
+.send-button{background:#7df8ff;border-color:#d5ffff;box-shadow:3px 3px 0 #326c92}
+.new-chat,.save-button{background:#ff78c8}
+.quick-actions button{font-family:'VT323',monospace;font-size:21px}
+.sidebar-note{border-color:#3b6c8c;background:linear-gradient(135deg,#11172e,#16112e)}
+.status-dot{box-shadow:0 0 8px #7dffb3}
+@media(max-width:650px){.topbar:after{display:none}.avatar-stage:before,.avatar-stage:after{font-size:6px}.avatar-caption{max-width:90%;text-align:center}}
