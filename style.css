@@ -128,3 +128,41 @@ body.aura-showcase{margin:0;min-height:100vh;background:radial-gradient(ellipse 
 @media(min-width:1100px){.conversation-drawer{display:grid;grid-template-columns:1fr;}.hero-scene{min-height:660px}}
 @media(max-width:900px){.aura-app{grid-template-columns:100px minmax(0,1fr);margin:10px}.aura-nav{padding:18px 8px;gap:12px}.nav-tile{width:78px;min-height:78px;font-size:12px}.nav-tile b{font-size:24px}.hero-actions{grid-template-columns:minmax(160px,1fr) repeat(4,70px);left:14px;right:14px;gap:8px}.feature-button span{font-size:12px}.feature-button b{font-size:23px}.mood-card{width:210px;right:14px;bottom:125px}.portrait-greeting{right:8%;top:18%;max-width:280px;font-size:15px}}
 @media(max-width:620px){.aura-top{height:78px;padding:12px}.aura-logo strong{font-size:26px;letter-spacing:4px}.aura-logo small{font-size:10px}.logo-gem{font-size:28px}.top-controls{gap:3px}.online-pill{padding:8px 10px;font-size:12px}.aura-showcase .icon-button{width:32px;height:38px;font-size:18px}.aura-app{display:block;margin:7px;border-radius:15px}.aura-nav{flex-direction:row;justify-content:space-around;padding:8px 4px;gap:4px;border-right:0;border-bottom:1px solid #263d7d}.nav-tile{width:19%;min-height:57px;border-radius:12px;gap:3px;font-size:10px}.nav-tile b{font-size:19px}.hero-scene{min-height:700px}.human-portrait{background-position:45% center}.scene-heading{left:14px;top:14px;font-size:12px;letter-spacing:1.5px}.scene-heading small{font-size:10px}.portrait-greeting{top:75px;right:10px;max-width:205px;padding:10px 12px;border-radius:14px;font-size:12px}.mood-card{width:165px;right:10px;bottom:140px;padding:12px;border-radius:16px}.mood-title{font-size:11px;margin-bottom:10px}.mood-row{font-size:13px;gap:7px}.mood-row span:first-child{font-size:20px}.mood-meter{margin:8px 0 12px 0;height:7px}.mood-card hr{margin:12px 0}.style-cycle{font-size:13px}.hero-actions{left:9px;right:9px;bottom:10px;grid-template-columns:repeat(4,1fr);gap:6px}.hero-composer{grid-column:1/-1;min-height:64px;padding:8px;gap:8px;border-radius:16px}.mic-button,.hero-send{width:40px;height:40px;font-size:17px;border-radius:13px}.hero-composer textarea{font-size:14px}.voice-status{display:none}.feature-button{min-height:64px;border-radius:14px}.feature-button b{font-size:21px}.feature-button span{font-size:11px}.portrait-label{left:30%;bottom:100px}.portrait-label strong{font-size:16px}.conversation-drawer{padding:13px}.conversation-drawer .two-col{grid-template-columns:1fr}.aura-footer{font-size:8px;letter-spacing:1.5px}}
+
+/* Motion pass: animated ambient scene, glowing UI, floating particles and responsive interactions */
+@keyframes aura-nebula{0%,100%{background-position:center,center,0% 0%;filter:saturate(1)}50%{background-position:center,center,100% 70%;filter:saturate(1.25)}}
+@keyframes aura-glow{0%,100%{box-shadow:0 0 16px #564bff22, inset 0 0 18px #4d3cff08}50%{box-shadow:0 0 28px #5c54ff55, inset 0 0 22px #4d3cff12}}
+@keyframes aura-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes aura-pulse{0%,100%{opacity:.6;transform:scale(.96)}50%{opacity:1;transform:scale(1.04)}}
+@keyframes aura-scan{0%{transform:translateY(-120%);opacity:0}10%{opacity:.35}85%{opacity:.18}100%{transform:translateY(360%);opacity:0}}
+@keyframes aura-twinkle{0%,100%{opacity:.1;transform:translateY(0)}50%{opacity:.85;transform:translateY(-10px)}}
+@keyframes aura-orbit{from{transform:rotate(0deg) translateX(8px) rotate(0deg)}to{transform:rotate(360deg) translateX(8px) rotate(-360deg)}}
+@keyframes aura-slide-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.aura-showcase{background-size:cover;animation:aura-nebula 18s ease-in-out infinite}
+.aura-logo .logo-gem{animation:aura-pulse 3s ease-in-out infinite}
+.online-pill i{animation:aura-pulse 1.8s ease-in-out infinite}
+.aura-app{animation:aura-slide-in .8s ease-out both}
+.hero-scene{isolation:isolate}
+.human-portrait{animation:aura-float 7s ease-in-out infinite;background-position:center 34%;transition:filter .5s ease,background-position .6s ease}
+.human-portrait:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 5px,#88a8ff0a 6px 7px);mix-blend-mode:screen;animation:aura-scan 12s linear infinite}
+.human-portrait[data-style="cyberpunk"]{filter:hue-rotate(30deg) saturate(1.35)}
+.human-portrait[data-style="anime"]{filter:saturate(1.25) contrast(1.06)}
+.human-portrait[data-style="pixel"]{filter:saturate(1.3) contrast(1.15);background-size:cover}
+.portrait-greeting{animation:aura-float 5s ease-in-out infinite;transition:transform .25s ease,box-shadow .25s ease}
+.portrait-greeting:hover{transform:translateY(-4px);box-shadow:0 0 35px #3b4dff55}
+.mood-card{animation:aura-float 6s ease-in-out infinite;backdrop-filter:blur(14px);transition:transform .3s ease,border-color .3s ease}
+.mood-card:hover{transform:translateY(-4px);border-color:#8e76ff}
+.mood-meter i{transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.nav-tile,.feature-button,.icon-button,.style-cycle,.hero-send,.mic-button{transition:transform .22s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease}
+.nav-tile:active,.feature-button:active,.hero-send:active,.mic-button:active{transform:scale(.95)}
+.nav-tile.active{animation:aura-glow 4s ease-in-out infinite}
+.feature-button:hover{transform:translateY(-5px);box-shadow:0 0 25px #5554ff55}
+.hero-composer:focus-within{border-color:#a78bfa;box-shadow:0 0 25px #635bff44}
+.hero-send:hover,.mic-button:hover{transform:scale(1.07);box-shadow:0 0 28px #9b5cff99}
+.conversation-drawer .message{animation:aura-slide-in .35s ease-out both}
+.conversation-drawer .suggestions button{transition:all .2s ease}
+.conversation-drawer .suggestions button:hover{transform:translateY(-2px);border-color:#8b72ff;box-shadow:0 0 15px #5345ff44}
+.scene-heading span{animation:aura-pulse 4s ease-in-out infinite}
+.aura-main{position:relative}
+.aura-footer{animation:aura-twinkle 6s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.aura-showcase,.aura-logo .logo-gem,.online-pill i,.aura-app,.human-portrait,.human-portrait:after,.portrait-greeting,.mood-card,.nav-tile.active,.scene-heading span,.aura-footer,.conversation-drawer .message{animation:none!important;transition:none!important}}
