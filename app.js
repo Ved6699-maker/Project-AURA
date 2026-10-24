@@ -7,3 +7,21 @@ $("#chatForm").addEventListener("submit",e=>{e.preventDefault();send($("#message
 function populateVoices(){if(!("speechSynthesis"in window))return;const s=$("#voiceSelect"),old=prefs.voice;s.replaceChildren(new Option("Device default","default"));speechSynthesis.getVoices().forEach((v,i)=>s.add(new Option(v.name+" · "+v.lang,String(i))));if([...s.options].some(o=>o.value===old))s.value=old;}if("speechSynthesis"in window){populateVoices();speechSynthesis.onvoiceschanged=populateVoices;}
 function speak(text){if(!("speechSynthesis"in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.rate=prefs.tone==="playful"?1.08:.96;u.pitch=prefs.appearance==="anime"?1.15:1;const v=$("#voiceSelect").value;if(v!=="default"){const voice=speechSynthesis.getVoices()[Number(v)];if(voice)u.voice=voice;}speechSynthesis.speak(u);}
 $("#voiceBtn").addEventListener("click",()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$("#voiceStatus").textContent="Voice input isn't supported in this browser.";return;}const rec=new SR();rec.lang="en-IN";rec.interimResults=false;$("#voiceStatus").textContent="Listening… speak now";rec.onresult=e=>{$("#messageInput").value=e.results[0][0].transcript;$("#voiceStatus").textContent="Voice captured — press Send"};rec.onerror=()=>$("#voiceStatus").textContent="Microphone unavailable or permission denied.";rec.onend=()=>{if($("#voiceStatus").textContent==="Listening… speak now")$("#voiceStatus").textContent="Voice input uses your browser"};rec.start()});window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e;$("#installBtn").hidden=false});$("#installBtn").addEventListener("click",async()=>{if(!deferredInstall)return;deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;$("#installBtn").hidden=true});if("serviceWorker"in navigator&&location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));setPrefs();
+/* Retro companion game layer: mood reactions, idle sprite motion, and keyboard shortcut */
+const auraMoodClasses=["mood-happy","mood-sad","mood-thinking","mood-excited","mood-calm"];
+function setAuraMood(text){
+ const t=String(text||"").toLowerCase(),av=$("#avatar"),label=$("#moodText");
+ av.classList.remove(...auraMoodClasses);
+ let mood="mood-calm",caption="Calm · Here with you";
+ if(/\b(happy|great|awesome|excited|yay|won|love it|amazing|thank you|thanks)\b/.test(t)){mood="mood-happy";caption="Happy · Pixel smile ✦";}
+ else if(/\b(sad|upset|lonely|stress|anxious|worried|bad day|scared|afraid|tired)\b/.test(t)){mood="mood-sad";caption="Gentle · Listening ♡";}
+ else if(/\b(think|idea|plan|how do|why|question|problem|solve|brainstorm)\b/.test(t)){mood="mood-thinking";caption="Thinking · Processing…";}
+ else if(/\b(dance|party|celebrate|game|play|fun)\b/.test(t)){mood="mood-excited";caption="Excited · Let's go! ★";}
+ av.classList.add(mood);label.textContent=caption;
+}
+const originalSend=send;
+send=async function(text){setAuraMood(text);return originalSend(text)};
+document.querySelectorAll("[data-action]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.action==="wave")setAuraMood("happy hello");else if(b.dataset.action==="dance")setAuraMood("celebrate game");else if(b.dataset.action==="listen")setAuraMood("sad worried");else setAuraMood("thinking");}));
+$("#messageInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("#chatForm").requestSubmit()}});
+$("#newChat").addEventListener("click",()=>{setAuraMood("");});
+$("#clearChat").addEventListener("click",()=>{setAuraMood("");});
