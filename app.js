@@ -25,3 +25,19 @@ document.querySelectorAll("[data-action]").forEach(b=>b.addEventListener("click"
 $("#messageInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("#chatForm").requestSubmit()}});
 $("#newChat").addEventListener("click",()=>{setAuraMood("");});
 $("#clearChat").addEventListener("click",()=>{setAuraMood("");});
+
+/* Controls for the reference-inspired AURA dashboard */
+const styleNames=["Modern","Cyberpunk","Anime","Pixel"];
+let auraStyleIndex=0;
+$("#styleCycle")?.addEventListener("click",()=>{auraStyleIndex=(auraStyleIndex+1)%styleNames.length;$("#styleCycle").innerHTML=styleNames[auraStyleIndex]+' <span>›</span>';const portrait=$("#humanPortrait");portrait.dataset.style=styleNames[auraStyleIndex].toLowerCase();if(portrait.dataset.style==="pixel"){portrait.style.imageRendering="pixelated"}else{portrait.style.imageRendering="auto"}});
+document.querySelectorAll("[data-feature]").forEach(button=>button.addEventListener("click",()=>{
+ const f=button.dataset.feature;
+ if(f==="customize")$("#customizePanel").scrollIntoView({behavior:"smooth",block:"center"});
+ else if(f==="voice")$("#voiceBtn").click();
+ else if(f==="styles")$("#styleCycle").click();
+ else if(f==="actions"){const moods=[["😊","Happy","76%"],["🤔","Thinking","55%"],["💜","Calm","68%"],["✨","Excited","94%"]];const current=moods.findIndex(m=>m[1]===$("#moodName").textContent),next=moods[(current+1)%moods.length];$("#moodEmoji").textContent=next[0];$("#moodName").textContent=next[1];$("#moodMeterFill").style.width=next[2];$("#moodText").textContent=next[1]+" · Here with you";}
+}));
+$("#appearance")?.addEventListener("change",()=>{const v=$("#appearance").value;$("#styleCycle").innerHTML=(v==="anime"?"Anime":v==="cool"?"Cyberpunk":"Modern")+' <span>›</span>';});
+const originalSetPrefs=setPrefs;
+setPrefs=function(){originalSetPrefs();const v=prefs.appearance;$("#styleCycle").innerHTML=(v==="anime"?"Anime":v==="cool"?"Cyberpunk":"Modern")+' <span>›</span>';};
+try{setPrefs()}catch(e){}
