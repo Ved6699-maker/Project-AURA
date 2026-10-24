@@ -79,3 +79,20 @@ body{background-image:linear-gradient(#9c76ff12 1px,transparent 1px),linear-grad
 .sidebar-note{border-color:#3b6c8c;background:linear-gradient(135deg,#11172e,#16112e)}
 .status-dot{box-shadow:0 0 8px #7dffb3}
 @media(max-width:650px){.topbar:after{display:none}.avatar-stage:before,.avatar-stage:after{font-size:6px}.avatar-caption{max-width:90%;text-align:center}}
+
+/* Animated pixel companion reactions */
+.avatar.mood-happy .mouth{height:8px;border-bottom:3px solid #a83d69;background:#ff9bb622}
+.avatar.mood-happy .blush{background:#f06b9b99;box-shadow:0 0 0 2px #f06b9b22}
+.avatar.mood-sad .mouth{top:68px;height:5px;border-bottom:0;border-top:2px solid #a74f66;border-radius:50% 50% 0 0}
+.avatar.mood-sad .eyes i{transform:scaleY(.7);background:#42304e}
+.avatar.mood-thinking{animation:nod .9s ease-in-out infinite}
+.avatar.mood-thinking .eyes i:first-child{transform:translateY(-2px) scaleY(.8)}
+.avatar.mood-excited{animation:dance .55s ease-in-out infinite}
+.avatar.mood-excited .mouth{width:18px;height:9px;border:2px solid #a74f66;background:#7c2d5933}
+.avatar.mood-excited .blush{background:#f06b9b99}
+.avatar.mood-calm{animation:float 4s ease-in-out infinite}
+.avatar.mood-happy{animation:float 1.5s ease-in-out infinite}
+.avatar.mood-sad{animation:nod 2.5s ease-in-out infinite}
+.avatar.mood-happy .eyes i{height:3px}
+.avatar.mood-sad .brow{transform:rotate(-10deg)}
+@media(prefers-reduced-motion:reduce){.avatar,.avatar[class*="mood-"]{animation:none!important}.eyes i{animation:none!important}}
